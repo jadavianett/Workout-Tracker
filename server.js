@@ -1,14 +1,21 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const logger = require("morgan");
 const app = express();
 const PORT = process.env.PORT || 3000;
+const db = require("./models");
 
+
+app.use(logger("dev"));
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+const workoutController = require("./controllers/workoutController");
+app.use(workoutController);
+
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/pizza-parlour",
+  process.env.MONGODB_URI || "mongodb://localhost/workoutdb",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -36,6 +43,8 @@ app.get("/api/config", (req, res) => {
     success: true,
   });
 });
+
+require("./routes/htmlRoutes")(app)
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
