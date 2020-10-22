@@ -9,10 +9,5 @@ module.exports = function(app){
     app.get("/exercise", (req,res) => {
         res.sendFile(path.join(__dirname, "../public/exercise.html"))
     });
-
-    app.post("/api/workouts", (req,res) => {
-        res.sendFile(path.join(__dirname, "../public/exercise.html"))
-    })
-    
     
     };
