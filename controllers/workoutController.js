@@ -52,9 +52,10 @@ router.get("/api/workouts", (req, res) => {
       });
   });
 
+  // finds the workouts from the last 7 days 
   router.get("/api/workouts/range", (req, res) => {
     db.Workout.find({})
-      .limit(5)
+      .limit(7)
       .then((foundWorkout) => {
         res.json(foundWorkout);
       })
