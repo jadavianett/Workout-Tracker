@@ -1,7 +1,9 @@
+//requiring express, router, and models 
 const express = require("express");
 const router = express.Router();
 const db = require("../models");
 
+// returns the workouts
 router.get("/api/workouts", (req, res) => {
     db.Workout.find({})
       .then((foundWorkout) => {
@@ -11,11 +13,12 @@ router.get("/api/workouts", (req, res) => {
         console.log(err);
         res.json({
           error: true,
-          message: "Did not create new workout.",
+          message: "Did not find any workouts.",
         });
       });
   });
 
+//adds a new workout 
   router.post("/api/workouts", (req, res) => {
     db.Workout.create(req.body)
       .then((newWorkout) => {
@@ -30,7 +33,7 @@ router.get("/api/workouts", (req, res) => {
       });
   });
 
-
+//finds an updates a workout by id
   router.put("/api/workouts/:id", (req, res) => {
     db.Workout.findByIdAndUpdate(
       req.params.id,
@@ -64,4 +67,5 @@ router.get("/api/workouts", (req, res) => {
       });
   });
 
+//exporting the controller 
 module.exports = router;
