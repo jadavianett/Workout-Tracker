@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 const db = require("./models");
 
 
@@ -15,7 +15,7 @@ const workoutController = require("./controllers/workoutController");
 app.use(workoutController);
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/workoutdb",
+  process.env.MONGODB_URI || "mongodb://localhost/workout",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
